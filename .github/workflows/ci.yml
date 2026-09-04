@@ -1,0 +1,32 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches:
+      - main
+      - 'feature/**'
+
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Check CPU HTML
+        run: |
+          test -f cpu.html
+          echo "CPU HTML file exists"
+
+      - name: Check Keyboard HTML
+        run: |
+          test -f keyboard.html
+          echo "Keyboard HTML file exists"
+
+      - name: CI Test Successful
+        run: echo "All tests passed successfully!"
